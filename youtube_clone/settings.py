@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     # Third Party Apps
     'import_export',
     'taggit',
+    'channel',
 ]
 
 MIDDLEWARE = [

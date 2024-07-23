@@ -138,16 +138,24 @@
                 <div class="video">
                     <div class="video__thumbnail">
                         <a href="{% url 'video-detail' v.id %}">
-                        <img src="{{v.image.url}}" alt="">
+                        <img src="{{ v.image.url }}" alt="">
                     </div>
                     <div class="video__details">
                         <div class="author">
-                            <img src="{% static 'images/logo.png' %}" alt="">
+                            <img src="{{ v.user.channel.image.url }}" alt="">
                         </div>
                         <div class="title">
                             <a href="{% url 'video-detail' v.id %}">
-                            <h3>{{ v.title|truncatechars:35 }}</h3>
-                            <a href=""><small>Dustin <i class="fas fa-check-circle"></i></small></a>
+                                <h3>{{ v.title|truncatechars:35 }}</h3>
+                            </a>
+                            <a href="">
+                                <small>
+                                    {{ v.user.channel.channel_name }}
+                                    {% if v.user.channel.verified == True %}
+                                        <i class="fas fa-check-circle"></i>
+                                    {% endif %}
+                                </small>
+                            </a>
                             <span><small>{{ v.views }} Views. {{ v.date|timesince }} ago</small></span>
                         </div>
                     </div>
@@ -157,6 +165,6 @@
         </div>
     </div>
 
-<script src="js/main.js"></script>
+{% comment %} <script src="js/main.js"></script> {% endcomment %}
 </body>
 </html>
