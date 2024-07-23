@@ -1,12 +1,12 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
-# Create your views here.
-def homepage(request):
-  return render(request, "test_temp/index.html")
+from .models import Video
 
-def aboutpage(request):
-  return render(request, "test_temp/about.html")
-    
-def contactpage(request):
-  return render(request, "test_temp/contact.html")
+# Create your views here.
+def index(request):
+  video = Video.objects.filter(visibility="public").order_by("-date")
+  context = {
+    "video":video
+  }
+  return render(request, "index.html", context)
