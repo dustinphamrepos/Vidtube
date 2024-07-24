@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css" integrity="sha384-3B6NwesSXE7YJlcLI9RpRqGf2p/EgVH8BgoKTaUrmKNDkHPStTQ3EyoYjCGXaOTS" crossorigin="anonymous" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
     <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.2/axios.min.js" integrity="sha512-JSCFHhKDilTRRXe9ak/FJ28dcpOJxzQaCd3Xg8MyF6XFjODhy/YMCM8HW0TFDckNHWUewW+kfvhin43hKtJxAw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.2/axios.min.js" integrity="sha512-b94Z6431JyXY14iSXwgzeZurHHRNkLt9d6bAHt7BZT38eqV+GyngIi/tVye4jBKPYQ2lBdRs0glww4fmpuLRwA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <style>
         a {
             text-decoration: none;
@@ -134,7 +134,7 @@
                             <span> <i class="fa fa-caret-down"></i> show more</span>
                         </div>
                         <div>
-                            <button  id="sub_btn" onclick="addSub()" class="subscribe-btn">Subscribe</button>
+                            <button id="sub_btn" onclick="addSub()" class="subscribe-btn">Subscribe</button>
                         </div>
                     </div>
 
@@ -259,7 +259,7 @@
     </main>
     
 
-<script src="js/main.js"></script>
+<script src="{% static 'js/main.js' %}"></script>
 </body>
 </html>
 
@@ -352,35 +352,40 @@
 
 <!-- Subscribe feature -->
 <script>
-    let sub_counter = document.getElementById('count')
-    sub_button = document.getElementById('sub_btn')
-    subscriber_added = []
+    let sub_counter = document.getElementById('count');
+    let sub_button = document.getElementById('sub_btn');
+    let subscriber_added = [];
     
-    function addSub(){
-        // sub_button.classList.add('loading')
+    function addSub() {
         axios
-        .get('{% url "add-sub" video.user.id %}')
-        .then(response =>{
-            this.response = response.data;
-            sub_button.innerHTML = this.response;
-            loadSub()
-            // sub_button.classList.remove('loading')
-            sub_button.classList.toggle("unsubscribe-btn")
+        .get('{% url "add-sub" channel.id %}')  // Đảm bảo `channel` có sẵn trong context
+        .then(response => {
+            //console.log("Add Sub Response:", response.data);
+            sub_button.innerHTML = response.data.message;
+            loadSub();
+            sub_button.classList.toggle("unsubscribe-btn");
         })
+        .catch(error => {
+            //console.error("Error adding subscription:", error);
+        });
     }
     
-    function loadSub(){
+    function loadSub() {
         axios
-        .get('{% url "sub-load" channel.id %}')
-        .then(response =>{
-            console.log("Subscriber added:", response.data);
-            this.response = response.data;
-            subscriber_added = this.response
-            sub_counter.innerHTML = subscriber_added.length
+        .get('{% url "sub-load" channel.id %}')  // Đảm bảo `channel` có sẵn trong context
+        .then(response => {
+            //console.log("Load Sub Response:", response.data);
+            subscriber_added = response.data;
+            sub_counter.innerHTML = subscriber_added.length;
         })
+        .catch(error => {
+            //console.error("Error loading subscriptions:", error);
+        });
     }
-    window.onload = loadSub();
+    
+    window.onload = loadSub;
 </script>
+  
 
 <!-- Like feature -->
 <script>

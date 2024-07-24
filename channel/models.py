@@ -11,6 +11,7 @@ STATUS =  (
 )
 
 class Channel(models.Model):
+  channel_art = models.ImageField(upload_to=user_directory_path, null=True, blank=True)
   image = models.ImageField(upload_to=user_directory_path, null=True, blank=True)
   full_name = models.CharField(max_length=200) 
   channel_name = models.CharField(max_length=200) 

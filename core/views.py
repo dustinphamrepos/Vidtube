@@ -6,6 +6,7 @@ from django.views.decorators.csrf import csrf_exempt
 from channel.models import Channel
 
 from .models import Video, Comment
+from userauths.models import User
 
 # Create your views here.
 def index(request):
@@ -68,17 +69,17 @@ def add_new_subscribers(request, id):
 
   if user in channel.subscribers.all():
     channel.subscribers.remove(user)
-    response = "Subscribe"
-    return JsonResponse(response, safe=False, status=200)
+    response = {"message": "Subscribe"}
   else:
     channel.subscribers.add(user)
-    response = "Unsubscribe"
-    return JsonResponse(response, safe=False, status=200)
+    response = {"message": "Unsubscribe"}
+
+  return JsonResponse(response, status=200)
 
 # Load channel subs
 def load_channel_subs(request, id):
   channel = Channel.objects.get(id=id)
-  sub_lists = list(channel.subscribers.values())
+  sub_lists = list(channel.subscribers.values_list('id', flat=True))
   return JsonResponse(sub_lists, safe=False, status=200)
 
 def add_new_like(request, id):

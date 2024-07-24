@@ -1,276 +1,270 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Youtube</title>
-    <link rel="icon" type="images/png" href="images/youtube-icon.png">
-    <link rel="stylesheet" href="css/style.css" type="text/css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css" integrity="sha384-3B6NwesSXE7YJlcLI9RpRqGf2p/EgVH8BgoKTaUrmKNDkHPStTQ3EyoYjCGXaOTS" crossorigin="anonymous" />
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-</head>
-<body>
+    <link rel="icon" type="images/png" href="{% static 'images/youtube-icon.png' %}" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css" />
+    <link rel="stylesheet" href="{% static 'css/single.css' %}" type="text/css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css" integrity="sha384-3B6NwesSXE7YJlcLI9RpRqGf2p/EgVH8BgoKTaUrmKNDkHPStTQ3EyoYjCGXaOTS" crossorigin="anonymous"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.2/axios.min.js" integrity="sha512-JSCFHhKDilTRRXe9ak/FJ28dcpOJxzQaCd3Xg8MyF6XFjODhy/YMCM8HW0TFDckNHWUewW+kfvhin43hKtJxAw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>
+      a {
+          text-decoration: none;
+      }
 
+      .unsubscribe-btn {
+        background-color: gray;
+        color: white;
+      }
+  </style>
+  </head>
+  <body>
     <div class="header">
-        <!-- Header menu Start -->
+      <!-- Header menu Start -->
 
-        <div class="header__left">
-            <i id="menu" class="material-icons">menu</i>
-            <a href="index.html">
-                <img src="https://www.xda-developers.com/files/2017/08/After-12-Years-Google-Gives-YouTube-a-New-Logo-1900x700_c.png" alt="">
-            </a>
-        </div>
-        <!-- Header menu end -->
+      <div class="header__left">
+        <i id="menu" class="material-icons">menu</i>
+        <a href="index.html">
+          <img
+            src="https://www.xda-developers.com/files/2017/08/After-12-Years-Google-Gives-YouTube-a-New-Logo-1900x700_c.png"
+            alt=""
+          />
+        </a>
+      </div>
+      <!-- Header menu end -->
 
-        <!-- Header seach Start -->
+      <!-- Header seach Start -->
 
-        <div class="header__search">
-            <form action="">
-                <input type="text" placeholder="Search">
-                <button><i class="material-icons">search</i></button>
-            </form>
-        </div>
-        <!-- Header search Start -->
-        
-        <!-- Header Icons Start -->
-        <div class="header__icons">
-            <i class="material-icons display-this">search</i>
-            <i class="material-icons ">videocam</i>
-            <i class="material-icons">apps</i>
-            <i class="material-icons display-this">notifications</i>
-            <i id="drop-down" class="material-icons display-this">account_circle</i>
-        </div>
-        <!-- Header Icons Ends -->
+      <div class="header__search">
+        <form action="">
+          <input type="text" placeholder="Search" />
+          <button><i class="material-icons">search</i></button>
+        </form>
+      </div>
+      <!-- Header search Start -->
 
+      <!-- Header Icons Start -->
+      <div class="header__icons">
+        <i class="material-icons display-this">search</i>
+        <i class="material-icons">videocam</i>
+        <i class="material-icons">apps</i>
+        <i class="material-icons display-this">notifications</i>
+        <i id="drop-down" class="material-icons display-this">account_circle</i>
+      </div>
+      <!-- Header Icons Ends -->
     </div>
 
     <!-- Main Body Starts -->
     <div class="mainBody">
-        <div class="sidebar">
-            <div class="sidebar__categories">
-                
-                <!-- Single Category -->
-                <a href="index.html">
-                    <div class="sidebar__category">
-                        <i class="material-icons">home</i>
-                        <span>Home</span>
-                    </div>
-                </a>
-
-                <!-- Single Category -->
-                <div class="sidebar__category">
-                    <i class="material-icons">local_fire_department</i>
-                    <span>Trending</span>
-                </div>
-
-                <!-- Single Category -->
-                <div class="sidebar__category">
-                    <i class="material-icons">subscriptions</i>
-                    <span>Subscriptions</span>
-                </div>
+      <div class="sidebar">
+        <div class="sidebar__categories">
+          <!-- Single Category -->
+          <a href="index.html">
+            <div class="sidebar__category">
+              <i class="material-icons">home</i>
+              <span>Home</span>
             </div>
-            <hr>
-            <div class="sidebar__categories">
+          </a>
 
-                <!-- Single Category -->
-                <div class="sidebar__category">
-                    <i class="material-icons">library_add_check</i>
-                    <span>Library</span>
-                </div>
+          <!-- Single Category -->
+          <div class="sidebar__category">
+            <i class="material-icons">local_fire_department</i>
+            <span>Trending</span>
+          </div>
 
-                <!-- Single Category -->
-                <div class="sidebar__category">
-                    <i class="material-icons">history</i>
-                    <span>History</span>
-                </div>
-
-                <!-- Single Category -->
-                <a href="channel-videos.html">
-                    <div class="sidebar__category">
-                        <i class="material-icons">play_arrow</i>
-                        <span>Your Videos</span>
-                    </div>
-                </a>
-
-                <!-- Single Category -->
-                <div class="sidebar__category">
-                    <i class="material-icons">watch_later</i>
-                    <span>Watch Later</span>
-                </div>
-
-                <!-- Single Category -->
-                <div class="sidebar__category">
-                    <i class="material-icons">thumb_up</i>
-                    <span>Liked Videos</span>
-                </div>
-            </div>
-            <hr>
+          <!-- Single Category -->
+          <div class="sidebar__category">
+            <i class="material-icons">subscriptions</i>
+            <span>Subscriptions</span>
+          </div>
         </div>
-        <!-- Sidebar Ends -->
+        <hr />
+        <div class="sidebar__categories">
+          <!-- Single Category -->
+          <div class="sidebar__category">
+            <i class="material-icons">library_add_check</i>
+            <span>Library</span>
+          </div>
 
-        <!-- Video Section Starts -->
-        <div class="videos">
-            
-            <div class="channel-art">
-                <img src="images/channel-art.jpg" alt="">
+          <!-- Single Category -->
+          <div class="sidebar__category">
+            <i class="material-icons">history</i>
+            <span>History</span>
+          </div>
+
+          <!-- Single Category -->
+          <a href="channel-videos.html">
+            <div class="sidebar__category">
+              <i class="material-icons">play_arrow</i>
+              <span>Your Videos</span>
             </div>
-            <div class="channel-header flex">
-                <div class="channel-img-title flex">
-                    <img class="img" src="images/logo.jpg" alt="">
-                    <div class="channel-image-texts">
-                        <h4>Desphixs</h4>
-                        <span>2.46K subscribers</span>
-                    </div>
-                </div>
-                <div class="channel-header-btns">
-                    <div><a href="" class="channel-join">Join</a></div>
-                    <div><a href="" class="channel-subscribe">Subscribe</a></div>
-                </div>
-            </div>
-            <div class="channel-header-links flex">
-                <a href="channel.html" class="display-this">Home</a>
-                <a href="channel-videos.html" class="display-this">Videos</a>
-                <a href="community.html" class="dont-display-thdis">Community</a>
-                <a href="index.html" class="dont-display-this">Membership</a>
-                <a href="index.html" class="dont-display-this">Channels</a>
-                <a href="about.html" class="display-this">About</a>
-                <a href="index.html" class="dont-display-this"><i class="material-icons">search</i></a>
-            </div>
-            <div class="channel-intro-video">
-                <div class="intro-video">
-                    <video controls>
-                        <source src="video/Desphixs Intro new November 2020.mp4">
-                    </video>
-                </div>
-                <div class="intro-contents">
-                    <h3>Complete Guide to Becoming a Self taught Programmer/Developer</h3>
-                    <small class="small">337 views - 1 year ago</small>
-                    <p>In this video I will go through my 5 suggested steps for becoming a software developer of any type without going to college or bootcamp.</p>
+          </a>
 
-                    <small>Read More</small>
-                </div>
-            </div>
-            <hr>
-            <br>
-            <div class="popular-video flex">
-                <h3>Popular uploads</h3>
-                <div class="flex play-all">
-                    <i class="material-icons">play_arrow</i>
-                    <a href="">Play All</a>
-                </div>
-            </div>
-            <br>
-            <div class="videos__container">
-                <!-- Single Video Starts Here -->
-                <div class="video">
-                    <div class="video__thumbnail">
-                        <img src="images/1.jpg" alt="">
-                    </div>
-                    <div class="video__details">
-                        <div class="author">
-                            <img src="images/logo.jpg" alt="">
-                        </div>
-                        <div class="title">
-                            <h3>Youtube Clone Using HTML, CSS and JS</h3>
-                            <a href=""><small>Desphixs <i class="fas fa-check-circle"></i></small></a>
-                            <span><small>1M Views . 1 Months Ago</small></span>
-                        </div>
-                    </div>
-                </div>
+          <!-- Single Category -->
+          <div class="sidebar__category">
+            <i class="material-icons">watch_later</i>
+            <span>Watch Later</span>
+          </div>
 
-                <!-- Single Video Starts Here -->
-                <div class="video">
-                    <div class="video__thumbnail">
-                        <img src="images/1.jpg" alt="">
-                    </div>
-                    <div class="video__details">
-                        <div class="author">
-                            <img src="images/logo.jpg" alt="">
-                        </div>
-                        <div class="title">
-                            <h3>Youtube Clone Using HTML, CSS and JS</h3>
-                            <a href=""><small>Desphixs <i class="fas fa-check-circle"></i></small></a>
-                            <span><small>1M Views . 1 Months Ago</small></span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Single Video Starts Here -->
-                <div class="video">
-                    <div class="video__thumbnail">
-                        <img src="images/1.jpg" alt="">
-                    </div>
-                    <div class="video__details">
-                        <div class="author">
-                            <img src="images/logo.jpg" alt="">
-                        </div>
-                        <div class="title">
-                            <h3>Youtube Clone Using HTML, CSS and JS</h3>
-                            <a href=""><small>Desphixs <i class="fas fa-check-circle"></i></small></a>
-                            <span><small>1M Views . 1 Months Ago</small></span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Single Video Starts Here -->
-                <div class="video">
-                    <div class="video__thumbnail">
-                        <img src="images/1.jpg" alt="">
-                    </div>
-                    <div class="video__details">
-                        <div class="author">
-                            <img src="images/logo.jpg" alt="">
-                        </div>
-                        <div class="title">
-                            <h3>Youtube Clone Using HTML, CSS and JS</h3>
-                            <a href=""><small>Desphixs <i class="fas fa-check-circle"></i></small></a>
-                            <span><small>1M Views . 1 Months Ago</small></span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Single Video Starts Here -->
-                <div class="video">
-                    <div class="video__thumbnail">
-                        <img src="images/1.jpg" alt="">
-                    </div>
-                    <div class="video__details">
-                        <div class="author">
-                            <img src="images/logo.jpg" alt="">
-                        </div>
-                        <div class="title">
-                            <h3>Youtube Clone Using HTML, CSS and JS</h3>
-                            <a href=""><small>Desphixs <i class="fas fa-check-circle"></i></small></a>
-                            <span><small>1M Views . 1 Months Ago</small></span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Single Video Starts Here -->
-                <div class="video">
-                    <div class="video__thumbnail">
-                        <img src="images/1.jpg" alt="">
-                    </div>
-                    <div class="video__details">
-                        <div class="author">
-                            <img src="images/logo.jpg" alt="">
-                        </div>
-                        <div class="title">
-                            <h3>Youtube Clone Using HTML, CSS and JS</h3>
-                            <a href=""><small>Desphixs <i class="fas fa-check-circle"></i></small></a>
-                            <span><small>1M Views . 1 Months Ago</small></span>
-                        </div>
-                    </div>
-                </div>
-
-                
-
-
-            </div>
+          <!-- Single Category -->
+          <div class="sidebar__category">
+            <i class="material-icons">thumb_up</i>
+            <span>Liked Videos</span>
+          </div>
         </div>
+        <hr />
+      </div>
+      <!-- Sidebar Ends -->
+
+      <!-- Video Section Starts -->
+      <div class="videos">
+        <div class="channel-art">
+          <img src="{{ channel.channel_art.url }}" alt="" />
+        </div>
+        <div class="channel-header flex">
+          <div class="channel-img-title flex">
+            <img class="img" src="{{ channel.image.url }}" alt="" />
+            <div class="channel-image-texts">
+              <h4>{{ channel.channel_name }}
+                {% if channel.verified == True %}
+                <small><i class="fas fa-check-circle"></i></small>
+                {% endif %}
+              </h4>
+              <span id="count"></span> <span>Subscribers</span>
+            </div>
+          </div>
+          <div class="channel-header-btns">
+            <div><a href="" class="channel-join">Join</a></div>
+            <div>
+              <button id="sub_btn" onclick="addSub()" style="padding: 15px 10px; margin-top: 10px; border: none;"class="subscribe-btn">
+                Subscribe
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="channel-header-links flex">
+          <a href="channel.html" class="display-this">Home</a>
+          <a href="channel-videos.html" class="display-this">Videos</a>
+          <a href="community.html" class="dont-display-thdis">Community</a>
+          <a href="index.html" class="dont-display-this">Membership</a>
+          <a href="index.html" class="dont-display-this">Channels</a>
+          <a href="about.html" class="display-this">About</a>
+          <a href="index.html" class="dont-display-this"
+            ><i class="material-icons">search</i>
+          </a>
+        </div>
+        {% if video_featured != None %}
+        <div class="channel-intro-video">
+          <div class="intro-video">
+            <video controls>
+              <source src="{{ video_featured.video.url }}" type="video/mp4"/>
+            </video>
+          </div>
+          <div class="intro-contents">
+            <h3>
+              {{video_featured.title|truncatechars:100}}
+            </h3>
+            <small class="small">{{video_featured.views}} view{{video_featured.views|pluralize}} - {{video_featured.date|timesince}} ago</small>
+            <p>
+              {{ video_featured.description|truncatechars:100 }}
+            </p>
+
+            <small>Read More</small>
+          </div>
+        </div>
+        {% endif %}
+        <hr />
+        <br />
+        <div class="popular-video flex">
+          <h3>Popular uploads</h3>
+          <div class="flex play-all">
+            <i class="material-icons">play_arrow</i>
+            <a href="">Play All</a>
+          </div>
+        </div>
+        <br />
+        <div class="videos__container">
+          <!-- Single Video Starts Here -->
+          {% for v in videos %}
+          <div class="video">
+            <div class="video__thumbnail">
+              {% if v.image %}
+              <a href="{% url 'video-detail' v.id %}"><img src="{{v.image.url}}" alt=""></a>
+              {% else %}
+              <a href="{% url 'video-detail' v.id %}"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrf0lpB42PwkxZCIvkgPjzFbA4SMYVhjyVLDdrC5_OLJEAI4GCqBfknjVqIeqQXvHuX9A&usqp=CAU" alt=""></a>
+              {% endif %}
+            </div>
+            <div class="video__details">
+              <div class="author">
+                {% if v.user.channel.image %}
+                <a href="{% url 'channel-profile' v.user.channel.id %}"><img src="{{ v.user.channel.image.url }}" alt=""></a>
+                {% else %}
+                <a href="{% url 'channel-profile' v.user.channel.id %}"><img src="https://cdn-icons-png.flaticon.com/512/1053/1053244.png?w=360" alt=""></a>
+                {% endif %}
+              </div>
+              <div class="title">
+                <a href="{% url 'video-detail' v.id %}">
+                  <h3>{{v.title|truncatechars:34}}</h3>
+                </a>
+                <a href="{% url 'channel-profile' v.user.channel.id %}">
+                  <small>{{v.user.channel.channel_name}}
+                    {% if v.user.channel.verified == True %}
+                    <i class="fas fa-check-circle"></i> 
+                    {% endif %}
+                  </small>
+                </a>
+                <span>
+                  <small>{{ v.views }} View{{ v.views|pluralize }} . {{ v.date|timesince }} ago</small>
+                </span>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
     </div>
 
-<script src="js/main.js"></script>
-</body>
+    <!-- Subscribe feature -->
+    <script>
+      let sub_counter = document.getElementById("count");
+      let sub_button = document.getElementById("sub_btn");
+      let subscriber_added = [];
+
+      function addSub() {
+        axios
+          .get('{% url "add-sub" channel.id %}')
+          .then((response) => {
+            //console.log("Add Sub Response:", response.data);
+            sub_button.innerHTML = response.data.message;
+            loadSub();
+            sub_button.classList.toggle("unsubscribe-btn");
+          })
+          .catch((error) => {
+            //console.error("Error adding subscription:", error);
+          });
+      }
+
+      function loadSub() {
+        axios
+          .get('{% url "sub-load" channel.id %}')
+          .then((response) => {
+            //console.log("Load Sub Response:", response.data);
+            subscriber_added = response.data;
+            sub_counter.innerHTML = subscriber_added.length;
+          })
+          .catch((error) => {
+            //console.error("Error loading subscriptions:", error);
+          });
+      }
+
+      window.onload = loadSub;
+    </script>
+
+    <script src="{% static 'js/main.js' %}"></script>
+  </body>
 </html>

@@ -1187,4 +1187,6 @@ a{
   padding: 15px 10px;
   margin-top: 10px;
   border: none;
+  background-color: red;
+  color: white;
 }
