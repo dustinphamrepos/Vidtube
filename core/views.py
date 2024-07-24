@@ -81,3 +81,22 @@ def load_channel_subs(request, id):
   sub_lists = list(channel.subscribers.values())
   return JsonResponse(sub_lists, safe=False, status=200)
 
+def add_new_like(request, id):
+  video = Video.objects.get(id=id)
+  user = request.user
+
+  if user in video.likes.all():
+    video.likes.remove(user)
+    like_response = '<i class="fa fa-thumbs-up"></i>'
+    return JsonResponse(like_response, safe=False, status=200)
+  else:
+    video.likes.add(user)
+    like_response = '<i class="fa fa-thumbs-up"></i>'
+    return JsonResponse(like_response, safe=False, status=200)
+
+def load_video_likes(request, id):
+  video = Video.objects.get(id=id)
+  likes_lists = list(video.likes.values())
+  return JsonResponse(likes_lists, safe=False, status=200)
+
+

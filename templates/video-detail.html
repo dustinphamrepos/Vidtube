@@ -83,13 +83,13 @@
 
                         <div class="flex">
                             <div class="icon">
-                                <a href=""><i class="fa fa-thumbs-up"></i></a>
-                                <label for="">5k</label>
+                                <button style="font-size: 17px;" id="like-button" onclick="addLike()"><i class="fa fa-thumbs-up"></i></button>
+                                <label for=""><span id="like-count"></span></label>
                             </div>
-
+    
                             <div class="icon">
-                                <a href=""><i class="fa fa-thumbs-down"></i></a>
-                                <label for="">Dislike</label>
+                                <button style="font-size: 17px;" id="like-button" onclick="addLike()"><i class="fa fa-thumbs-down"></i></button>
+                                <label for=""><span id="like-count"></span></label>
                             </div>
 
                             <div class="icon">
@@ -380,4 +380,33 @@
         })
     }
     window.onload = loadSub();
+</script>
+
+<!-- Like feature -->
+<script>
+    let likes_counter = document.getElementById('like-count')
+    like_button = document.getElementById('like-button')
+    likes_added = []
+    
+    function addLike(){
+        // sub_button.classList.add('loading')
+        axios
+        .get('{% url "add-like" video.id %}')
+        .then(like_response =>{
+                this.like_response = like_response.data;
+                like_button.innerHTML = this.like_response;
+                loadLike()
+        })
+    }
+    
+    function loadLike(){
+        axios
+        .get('{% url "like-load" video.id %}')
+        .then(like_response =>{
+                this.like_response = like_response.data;
+                likes_added = this.like_response
+                likes_counter.innerHTML = likes_added.length
+        })
+    }
+    window.onload = loadLike();
 </script>
