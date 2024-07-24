@@ -1,0 +1,35 @@
+<!-- Subscribe feature -->
+<script>
+  let sub_counter = document.getElementById("count");
+  let sub_button = document.getElementById("sub_btn");
+  let subscriber_added = [];
+
+  function addSub() {
+    axios
+      .get('{% url "add-sub" channel.id %}')
+      .then((response) => {
+        //console.log("Add Sub Response:", response.data);
+        sub_button.innerHTML = response.data.message;
+        loadSub();
+        sub_button.classList.toggle("unsubscribe-btn");
+      })
+      .catch((error) => {
+        //console.error("Error adding subscription:", error);
+      });
+  }
+
+  function loadSub() {
+    axios
+      .get('{% url "sub-load" channel.id %}')
+      .then((response) => {
+        //console.log("Load Sub Response:", response.data);
+        subscriber_added = response.data;
+        sub_counter.innerHTML = subscriber_added.length;
+      })
+      .catch((error) => {
+        //console.error("Error loading subscriptions:", error);
+      });
+  }
+
+  window.onload = loadSub;
+</script>

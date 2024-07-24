@@ -11,17 +11,7 @@
     <link rel="stylesheet" href="{% static 'css/single.css' %}" type="text/css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css" integrity="sha384-3B6NwesSXE7YJlcLI9RpRqGf2p/EgVH8BgoKTaUrmKNDkHPStTQ3EyoYjCGXaOTS" crossorigin="anonymous"/>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.2/axios.min.js" integrity="sha512-JSCFHhKDilTRRXe9ak/FJ28dcpOJxzQaCd3Xg8MyF6XFjODhy/YMCM8HW0TFDckNHWUewW+kfvhin43hKtJxAw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <style>
-      a {
-          text-decoration: none;
-      }
-
-      .unsubscribe-btn {
-        background-color: gray;
-        color: white;
-      }
-  </style>
+    
   </head>
   <body>
     <div class="header">
@@ -123,41 +113,7 @@
 
       <!-- Video Section Starts -->
       <div class="videos">
-        <div class="channel-art">
-          <img src="{{ channel.channel_art.url }}" alt="" />
-        </div>
-        <div class="channel-header flex">
-          <div class="channel-img-title flex">
-            <img class="img" src="{{ channel.image.url }}" alt="" />
-            <div class="channel-image-texts">
-              <h4>{{ channel.channel_name }}
-                {% if channel.verified == True %}
-                <small><i class="fas fa-check-circle"></i></small>
-                {% endif %}
-              </h4>
-              <span id="count"></span> <span>Subscribers</span>
-            </div>
-          </div>
-          <div class="channel-header-btns">
-            <div><a href="" class="channel-join">Join</a></div>
-            <div>
-              <button id="sub_btn" onclick="addSub()" style="padding: 15px 10px; margin-top: 10px; border: none;"class="subscribe-btn">
-                Subscribe
-              </button>
-            </div>
-          </div>
-        </div>
-        <div class="channel-header-links flex">
-          <a href="channel.html" class="display-this">Home</a>
-          <a href="channel-videos.html" class="display-this">Videos</a>
-          <a href="community.html" class="dont-display-thdis">Community</a>
-          <a href="index.html" class="dont-display-this">Membership</a>
-          <a href="index.html" class="dont-display-this">Channels</a>
-          <a href="about.html" class="display-this">About</a>
-          <a href="index.html" class="dont-display-this"
-            ><i class="material-icons">search</i>
-          </a>
-        </div>
+        {% include 'channel/partials/channel-header.html' %}
         {% if video_featured != None %}
         <div class="channel-intro-video">
           <div class="intro-video">
@@ -228,42 +184,6 @@
         </div>
       </div>
     </div>
-
-    <!-- Subscribe feature -->
-    <script>
-      let sub_counter = document.getElementById("count");
-      let sub_button = document.getElementById("sub_btn");
-      let subscriber_added = [];
-
-      function addSub() {
-        axios
-          .get('{% url "add-sub" channel.id %}')
-          .then((response) => {
-            //console.log("Add Sub Response:", response.data);
-            sub_button.innerHTML = response.data.message;
-            loadSub();
-            sub_button.classList.toggle("unsubscribe-btn");
-          })
-          .catch((error) => {
-            //console.error("Error adding subscription:", error);
-          });
-      }
-
-      function loadSub() {
-        axios
-          .get('{% url "sub-load" channel.id %}')
-          .then((response) => {
-            //console.log("Load Sub Response:", response.data);
-            subscriber_added = response.data;
-            sub_counter.innerHTML = subscriber_added.length;
-          })
-          .catch((error) => {
-            //console.error("Error loading subscriptions:", error);
-          });
-      }
-
-      window.onload = loadSub;
-    </script>
 
     <script src="{% static 'js/main.js' %}"></script>
   </body>
