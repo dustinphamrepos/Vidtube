@@ -179,6 +179,17 @@
                                             <div class="icon">
                                                 <label for=""><a href=""><small>Reply</small></a></label>
                                             </div>
+
+                                            {% if c.user == request.user %}
+                                            <div class="icon">
+                                                <input type="hidden" value="{{ c.id }}" name="" id="">
+                                                <label for="">
+                                                    <button data-cid={{c.id}} class="btn-del" style="color: red;">
+                                                        <small>Delete</small>
+                                                    </button>
+                                                </label>
+                                            </div>
+                                            {% endif %}
                                         </div>
                                     </div>
                                 </div>
@@ -279,6 +290,9 @@
                                 <div class="icon">\
                                     <label for=""><a href=""><small>Reply</small></a></label>\
                                 </div>\
+                                <div class="icon">\
+                                    <label for=""><a href=""><small style="color: red;">Delete</small></a></label>\
+                                </div>\
                             </div>\
                         </div>\
                     </div>\
@@ -291,6 +305,35 @@
             },
             error: function(error){
                 console.log(error);
+            }
+        })
+    })
+
+    // Deleting Comment
+    $("#comment-wrapper").on("click", ".btn-del", function(){
+        // console.log("Delete Comment Button is Clicked");
+        let id = $(this).attr("data-cid")
+
+        mydata = {
+            cid:id
+        }
+        mythis = $(this)
+
+        $.ajax({
+            type: "POST",
+            url: "{% url 'delete-comment' %}",
+            data: mydata,
+
+            success: function(data){
+                // console.log(data);
+                if(data.status === 1){
+                    // console.log("Comment Deleted");
+                    $(mythis).closest(".comment-tray").fadeOut();
+                }
+                if(data.status === 0){
+                    // console.log("Unable To Delete Comment");
+                    alert("Unable to delete comment, try again later...")
+                }
             }
         })
     })
