@@ -43,11 +43,11 @@ INSTALLED_APPS = [
     # My Apps
     'core',
     'userauths',
+    'channel',
     
     # Third Party Apps
     'import_export',
     'taggit',
-    'channel',
 ]
 
 MIDDLEWARE = [

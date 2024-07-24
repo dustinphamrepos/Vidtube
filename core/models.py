@@ -31,3 +31,13 @@ class Video(models.Model):
     
   def __str__(self):
     return self.title
+  
+class Comment(models.Model):
+  comment = models.CharField(max_length=10000)
+  user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+  active = models.BooleanField(default=True)
+  video = models.ForeignKey(Video, on_delete=models.CASCADE, related_name="comments")
+  date = models.DateTimeField(auto_now_add=True)
+
+  def __ste__(self):
+    return self.comment[:30]

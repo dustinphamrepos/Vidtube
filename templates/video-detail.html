@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Youtube</title>
-    <link rel="icon" type="images/png" href="images/youtube-icon.png">
+    <link rel="icon" type="images/png" href="{% static 'images/youtube-icon.png' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
     <link rel="stylesheet" href="{% static 'css/single.css' %}" type="text/css">
 
@@ -196,39 +196,23 @@
                         <label for="" class="tags-bg">HTML</label>
                     </div>
 
+                    {% for s in similar_videos %}
                     <div class="video_items vide_sidebar flex">
                         <a href="">
-                            <img src="{% static 'images/1.jpg' %}" alt="">
+                            {% if s.image %}
+                            <img src="{{s.image.url}}" alt="" >
+                            {% else %}
+                            <img src="http://127.0.0.1:8000/watch/1/" alt="">
+
+                            {% endif %}
                         </a>
                         <div class="details">
-                            <p>Youtube CLone using HTML, CSS and JS</p>
-                            <span>Dustin <i class="fa fa-check-circle"></i></span>
-                            <span>203K Views . 1 Week Ago </span>
+                            <a href="{% url 'video-detail' s.id %}"><p><b>{{s.title|truncatechars:40}}</b></p></a>
+                            <span>{{s.user.channel.channel_name}} {% if s.user.channel.verified == True %}<i class="fa fa-check-circle"></i> {% endif %}</span>
+                            <span><small>{{s.views}} Views . {{s.date|timesince}} Ago</small> </span>
                         </div>
                     </div>
-
-                    <div class="video_items vide_sidebar flex">
-                        <a href="">
-                            <img src="{% static 'images/1.jpg' %}" alt="">
-                        </a>
-                        <div class="details">
-                            <p>Youtube CLone using HTML, CSS and JS</p>
-                            <span>Dustin <i class="fa fa-check-circle"></i></span>
-                            <span>203K Views . 1 Week Ago </span>
-                        </div>
-                    </div>
-
-                    <div class="video_items vide_sidebar flex">
-                        <a href="">
-                            <img src="{% static 'images/1.jpg' %}" alt="">
-                        </a>
-                        <div class="details">
-                            <p>Youtube CLone using HTML, CSS and JS</p>
-                            <span>Dustin <i class="fa fa-check-circle"></i></span>
-                            <span>203K Views . 1 Week Ago </span>
-                        </div>
-                    </div>
-
+                    {% endfor %}
                     
                 </div>
             </div>
