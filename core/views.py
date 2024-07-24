@@ -1,7 +1,8 @@
+from django.http import HttpResponse
 from django.shortcuts import render
 from django.db.models import Count, Q
 
-from .models import Video
+from .models import Video, Comment
 
 # Create your views here.
 def index(request):
@@ -21,8 +22,26 @@ def videoDetail(request, pk):
   similar_videos = Video.objects.filter(tags__in=video_tags_id).exclude(id=video.id)
   similar_videos = similar_videos.annotate(same_tags=Count("tags", filter=Q(tags__in=video_tags_id))).order_by("-same_tags", "-date")[:25]
 
+  # Getting all comment related to a video
+  comment = Comment.objects.filter(active=True, video=video).order_by("-date")
+  
   context = {
     "video": video,
     "similar_videos": similar_videos,
+    "comment": comment,
   }
   return render(request, "video-detail.html", context)
+
+def ajax_save_comment(request):
+  if request.method == "POST":
+    pk = request.POST.get("id")
+
+    comment = request.POST.get("comment")
+    video = Video.objects.get(id=pk)
+    user = request.user
+
+    new_comment = Comment.objects.create(comment=comment, user=user, video=video)
+    new_comment.save()
+
+    response = "Comment Posted"
+    return HttpResponse(response)
