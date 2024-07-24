@@ -17,8 +17,11 @@ def index(request):
   return render(request, "index.html", context)
 def videoDetail(request, pk):
   video = Video.objects.get(id=pk)
-  channel = Channel.objects.get(user=video.user)
   
+  channel = Channel.objects.get(user=video.user)
+  channel.total_views = channel.total_views + 1
+  channel.save()
+
   video.views = video.views + 1
   video.save()
 

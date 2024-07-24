@@ -23,5 +23,18 @@ class Channel(models.Model):
   subscribers = models.ManyToManyField(User, related_name="user_subs")
   verified = models.BooleanField(default=False)
 
+  total_views = models.IntegerField(default=0)
+    
+  business_email = models.EmailField(null=True, blank=True)
+  make_business_email_public = models.BooleanField(default=False)
+
+  business_location = models.CharField(null=True, blank=True, max_length=500)
+  make_business_location_public = models.BooleanField(default=False)
+
+  website = models.URLField(default="https://my-website.com/")
+  instagram = models.URLField(default="https://instagram.com/")
+  facebook = models.URLField(default="https://facebook.com/")
+  twitter = models.URLField(default="https://twitter.com/")
+
   def __str__(self):
     return self.channel_name
