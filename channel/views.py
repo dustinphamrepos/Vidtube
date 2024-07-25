@@ -93,3 +93,15 @@ def delete_comment(request, community_id, comment_id):
   messages.success(request, f"Comment deleted.")
 
   return redirect("channel-community-detail", community.channel.id, community.id)
+
+@login_required
+def like_community_post(request, community_id):
+  community = Community.objects.get(id=community_id)
+  user = request.user
+
+  if user in community.likes.all():
+    community.likes.remove(user)
+  else:
+    community.likes.add(user)
+    
+  return HttpResponseRedirect(request.META.get("HTTP_REFERER"))
