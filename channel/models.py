@@ -38,3 +38,35 @@ class Channel(models.Model):
 
   def __str__(self):
     return self.channel_name
+
+def user_directory_path(instance, filename):
+  return "user_{0}/{1}".format(instance.channel.user.id, filename)
+
+class Community(models.Model):
+  channel = models.ForeignKey(Channel, on_delete=models.CASCADE)
+  image = models.ImageField(upload_to=user_directory_path, null=True, blank=True)
+  content = models.TextField(null=True, blank=True)
+  date = models.DateTimeField(auto_now_add=True)
+  status = models.CharField(max_length=100, choices=STATUS, default="active")
+  likes = models.ManyToManyField(User)
+
+  def __str__(self):
+    return self.channel.channel_name
+    
+  class Meta:
+    verbose_name = "Community"
+    verbose_name_plural = "Community Posts"
+
+class CommunityComment(models.Model):
+  community = models.ForeignKey(Community, on_delete=models.CASCADE, related_name="comments")
+  user = models.ForeignKey(User, on_delete=models.CASCADE)
+  comment = models.CharField(max_length=10000)
+  date = models.DateTimeField(auto_now_add=True)
+  active = models.BooleanField(default=True)
+
+  def __str__(self):
+    return self.community.channel.channel_name
+    
+  class Meta:
+    verbose_name = "Community Comments"
+    verbose_name_plural = "Community Comments"
