@@ -1,5 +1,5 @@
 from django.http import HttpResponseRedirect
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
@@ -83,3 +83,13 @@ def create_comment(request, community_id):
     new_comment.save()
     messages.success(request, f"Comment posted.")
     return HttpResponseRedirect(request.META.get("HTTP_REFERER"))
+  
+@login_required
+def delete_comment(request, community_id, comment_id):
+  community = Community.objects.get(id=community_id)
+  comment = CommunityComment.objects.get(id=comment_id, community=community)
+
+  comment.delete()
+  messages.success(request, f"Comment deleted.")
+
+  return redirect("channel-community-detail", community.channel.id, community.id)

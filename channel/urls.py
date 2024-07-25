@@ -10,4 +10,7 @@ urlpatterns = [
 
   # Create Comment URL
   path("community/<int:community_id>/create-comment/", views.create_comment, name="community-create-comment"),
+
+  # Delete Comment URL
+  path("community/<int:community_id>/<int:comment_id>/", views.delete_comment, name="community-delete-comment"),
 ]

@@ -17,6 +17,13 @@
             border: none;
             background: none;
         }
+        .message-alert {
+            background-color: rgb(169, 255, 166);
+            padding: 14px;
+            margin-bottom: 30px;
+            border-radius: 10px;
+            border: 1px solid rgb(13, 161, 0);
+        }
     </style>
 </head>
 <body>
@@ -127,6 +134,13 @@
 
                 <div class="content-border">
                     <div class="content-div">
+                        {% if messages %}
+                        <div class="message-alert">
+                            {% for message in messages %}
+                            <strong>{{ message }}</strong>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
                         <div class="header-comm">
                             <div class="channel-details">
                                 {% if community.channel.image %}
@@ -226,7 +240,7 @@
                                     </div>
                                 </div>
                                 <div class="delete-comment">
-                                    <a href=""><i class="material-icons">delete</i></a>
+                                    <a href="{% url 'community-delete-comment' c.community.id c.id %}"><i class="material-icons">delete</i></a>
                                 </div>
                             </div>
                             {% endfor %}
