@@ -1,4 +1,4 @@
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
 from django.db.models import Count, Q
 from django.views.decorators.csrf import csrf_exempt
@@ -40,6 +40,16 @@ def videoDetail(request, pk):
     "channel": channel,
   }
   return render(request, "video-detail.html", context)
+
+def save_video(request, video_id):
+  video = Video.objects.get(id=video_id)
+  user = request.user.profile
+
+  if video in user.saved_videos.all():
+    user.saved_videos.remove(video)
+  else:
+    user.saved_videos.add(video)
+  return HttpResponseRedirect(request.META.get("HTTP_REFERER"))
 
 def ajax_save_comment(request):
   if request.method == "POST":
