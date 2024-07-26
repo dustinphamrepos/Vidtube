@@ -10,6 +10,15 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css" integrity="sha384-3B6NwesSXE7YJlcLI9RpRqGf2p/EgVH8BgoKTaUrmKNDkHPStTQ3EyoYjCGXaOTS" crossorigin="anonymous" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <style>
+        .message-alert {
+            background-color: rgb(169, 255, 166);
+            padding: 14px;
+            margin-bottom: 30px;
+            border-radius: 10px;
+            border: 1px solid rgb(13, 161, 0);
+        }
+    </style>
 </head>
 <body>
 
@@ -112,6 +121,13 @@
 
         <!-- Video Section Starts -->
         <div class="videos">
+            {% if messages %}
+            <div class="message-alert">
+                {% for message in messages %}
+                <strong>{{ message }}</strong>
+                            {% endfor %}
+            </div>
+            {% endif %}
             <div class="drop-down-container">
                 <h1>Recommended</h1>
                 <div class="dropdown-content-background">
