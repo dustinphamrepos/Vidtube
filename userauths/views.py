@@ -47,7 +47,7 @@ def loginView(request):
     try:
       user = User.objects.get(email=email)
     except:
-      messages.warning(request, "User does not exist")
+      messages.error(request, "User does not exist")
         
     user = authenticate(request, email=email, password=password)
 
@@ -56,7 +56,7 @@ def loginView(request):
       messages.success(request, "You are logged in")
       return redirect("index")
     else:
-      messages.warning(request, "Username or Password, does not exist")
+      messages.error(request, "Username or Password, does not exist")
             
   return render(request, "userauths/sign-in.html")
 

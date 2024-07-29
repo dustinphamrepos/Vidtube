@@ -55,6 +55,8 @@
 
     </div>
 
+    {% include 'partials/alert.html' %}
+
     <!-- Main Body Starts -->
     <div class="mainBody">
         <div class="sidebar">
@@ -139,16 +141,8 @@
 
         <!-- Video Section Starts -->
         <div class="videos">
-            {% if messages %}
-            {% for message in messages %}
-            <div class="message-alert">
-              <strong>{{ message }}</strong>
-              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-            {% endfor %}
-            {% endif %}
             <div class="drop-down-container">
-                <h1>Recommended</h1>
+                <h1 style="font-size: 20px">Recommended</h1>
                 <div class="dropdown-content-background">
                     <div class="dropdown-contents">
                         <div class="dropdown-content">
@@ -200,6 +194,6 @@
         </div>
     </div>
 
-{% comment %} <script src="js/main.js"></script> {% endcomment %}
+    <script src="{% static 'js/main.js' %}"></script>
 </body>
 </html>

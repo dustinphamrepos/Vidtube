@@ -134,13 +134,7 @@
 
                 <div class="content-border">
                     <div class="content-div">
-                        {% if messages %}
-                        <div class="message-alert">
-                            {% for message in messages %}
-                            <strong>{{ message }}</strong>
-                            {% endfor %}
-                        </div>
-                        {% endif %}
+                        {% include 'partials/alert.html' %}
                         <div class="header-comm">
                             <div class="channel-details">
                                 {% if community.channel.image %}

@@ -47,14 +47,8 @@
 
 							<form class="loginForm" method="POST">
                 {% csrf_token %}
-                {% if messages %}
-                {% for message in messages %}
-                <div class="message-alert">
-                  <strong>{{ message }}</strong>
-                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-                {% endfor %}
-                {% endif %}
+    						{% include 'partials/alert.html' %}
+
 								<div class="input-fields-div autoMargin">
 									<div class="input-field">
                     <input name="email" id="user_name" type="email" class="validate">
