@@ -16,4 +16,7 @@ urlpatterns = [
 
   # Like Community Posts URL
   path("community/<int:community_id>/like/", views.like_community_post, name="community-post-like"),
+  
+  # Uploading video URL
+  path("channel/create/video/", views.video_upload, name="upload-video"),
 ]

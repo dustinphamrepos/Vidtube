@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Youtube</title>
-    <link rel="icon" type="images/png" href="images/youtube-icon.png">
+    <link rel="icon" type="images/png" href="{% static 'images/youtube-icon.png' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css" />
     <link rel="stylesheet" href="{% static 'css/single.css' %}" type="text/css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css" integrity="sha384-3B6NwesSXE7YJlcLI9RpRqGf2p/EgVH8BgoKTaUrmKNDkHPStTQ3EyoYjCGXaOTS" crossorigin="anonymous" />
@@ -64,68 +64,8 @@
 
     <!-- Main Body Starts -->
     <div class="mainBody">
-        <div class="sidebar">
-            <div class="sidebar__categories">
-                
-                <!-- Single Category -->
-                <a href="index.html">
-                    <div class="sidebar__category">
-                        <i class="material-icons">home</i>
-                        <span>Home</span>
-                    </div>
-                </a>
-
-                <!-- Single Category -->
-                <div class="sidebar__category">
-                    <i class="material-icons">local_fire_department</i>
-                    <span>Trending</span>
-                </div>
-
-                <!-- Single Category -->
-                <div class="sidebar__category">
-                    <i class="material-icons">subscriptions</i>
-                    <span>Subscriptions</span>
-                </div>
-            </div>
-            <hr>
-            <div class="sidebar__categories">
-
-                <!-- Single Category -->
-                <div class="sidebar__category">
-                    <i class="material-icons">library_add_check</i>
-                    <span>Library</span>
-                </div>
-
-                <!-- Single Category -->
-                <div class="sidebar__category">
-                    <i class="material-icons">history</i>
-                    <span>History</span>
-                </div>
-
-                <!-- Single Category -->
-                <a href="channel-videos.html">
-                    <div class="sidebar__category">
-                        <i class="material-icons">play_arrow</i>
-                        <span>Your Videos</span>
-                    </div>
-                </a>
-
-                <!-- Single Category -->
-                <div class="sidebar__category">
-                    <i class="material-icons">watch_later</i>
-                    <span>Watch Later</span>
-                </div>
-
-                <!-- Single Category -->
-                <div class="sidebar__category">
-                    <i class="material-icons">thumb_up</i>
-                    <span>Liked Videos</span>
-                </div>
-            </div>
-            <hr>
-        </div>
-        <!-- Sidebar Ends -->
-
+        {% include 'partials/sidebar.html' %}
+        
         <!-- Video Section Starts -->
         <div class="videos">
             {% include 'channel/partials/channel-header.html' %}
