@@ -1,4 +1,4 @@
-from django.http import HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -148,6 +148,16 @@ def video_edit(request, channel_id, video_id):
   }
   return render(request, "channel/upload-video.html", context)
 
+@login_required
+def video_delete(request, video_id):
+  video = Video.objects.get(id=video_id)
+
+  if request.user == video.user:
+    video.delete()
+    return redirect("studio")
+  else:
+    return HttpResponse("You are not allowed to delete this video")
+    
 @login_required
 def create_community_post(request, channel_id):
   channel = Channel.objects.get(id=channel_id)

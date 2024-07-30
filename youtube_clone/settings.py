@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'core',
     'userauths',
     'channel',
+    'useradmin',
     
     # Third Party Apps
     'import_export',

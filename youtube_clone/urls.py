@@ -23,6 +23,7 @@ urlpatterns = [
     path("", include("core.urls")),
     path("c/", include("channel.urls")),
     path("user/", include("userauths.urls")),
+    path("studio/", include("useradmin.urls")),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
