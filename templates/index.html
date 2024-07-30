@@ -1,122 +1,63 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Youtube</title>
-    <link rel="icon" type="images/png" href="{% static 'images/youtube-icon.png' %}">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css" integrity="sha384-3B6NwesSXE7YJlcLI9RpRqGf2p/EgVH8BgoKTaUrmKNDkHPStTQ3EyoYjCGXaOTS" crossorigin="anonymous" />
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-    <style>
-        .message-alert {
-            background-color: rgb(169, 255, 166);
-            padding: 14px;
-            margin-bottom: 30px;
-            border-radius: 10px;
-            border: 1px solid rgb(13, 161, 0);
-        }
-    </style>
-</head>
-<body>
-
-    <div class="header">
-        <!-- Header menu Start -->
-
-        <a style="text-decoration: none;" href="{% url 'index' %}">
-            <div class="header__left">
-                <i id="menu" class="material-icons">menu</i>
-                <img src="https://www.xda-developers.com/files/2017/08/After-12-Years-Google-Gives-YouTube-a-New-Logo-1900x700_c.png" alt="">
-            </div>
-        </a>
-        <!-- Header menu end -->
-
-        <!-- Header seach Start -->
-
-        <div class="header__search">
-            <form action="{% url 'search' %}" method="GET">
-                <input type="text" placeholder="Search" name="q">
-                <button><i class="material-icons">search</i></button>
-            </form>
-        </div>
-        <!-- Header search Start -->
-        
-        <!-- Header Icons Start -->
-        <div class="header__icons">
-            <i class="material-icons display-this">search</i>
-            <a href="{% url 'upload-video' %}"><i class="material-icons ">videocam</i></a>
-            <a href="{% url 'create-community-post' request.user.channel.id %}"><i class="material-icons ">add</i></a>
-            <i class="material-icons">apps</i>
-            <i class="material-icons display-this">notifications</i>
-            <a href="channel.html"><i id="drop-down" class="material-icons display-this">account_circle</i></a>
-        </div>
-        <!-- Header Icons Ends -->
-
-    </div>
-
-    {% include 'partials/alert.html' %}
-
-    <!-- Main Body Starts -->
-    <div class="mainBody">
-        {% include 'partials/sidebar.html' %}
-
-        <!-- Video Section Starts -->
-        <div class="videos">
-            <div class="drop-down-container">
-                <h1 style="font-size: 20px">Recommended</h1>
-                <div class="dropdown-content-background">
-                    <div class="dropdown-contents">
-                        <div class="dropdown-content">
-                            <i class="material-icons">videocam</i>
-                            <span>Create</span>
-                        </div>
-                        <div class="dropdown-content">
-                            <i class="material-icons">settings</i>
-                            <span>Settings</span>
-                        </div>
-                        <div class="dropdown-content">
-                            <i class="material-icons">person</i>
-                            <span>Switch Account</span>
-                        </div>
+{% include 'partials/alert.html' %}
+{% block content %}
+<!-- Main Body Starts -->
+<div class="mainBody">
+    {% include 'partials/sidebar.html' %}
+    <!-- Video Section Starts -->
+    <div class="videos">
+        <div class="drop-down-container">
+            <h1 style="font-size: 20px">Recommended</h1>
+            <div class="dropdown-content-background">
+                <div class="dropdown-contents">
+                    <div class="dropdown-content">
+                        <i class="material-icons">videocam</i>
+                        <span>Create</span>
+                    </div>
+                    <div class="dropdown-content">
+                        <i class="material-icons">settings</i>
+                        <span>Settings</span>
+                    </div>
+                    <div class="dropdown-content">
+                        <i class="material-icons">person</i>
+                        <span>Switch Account</span>
                     </div>
                 </div>
             </div>
-                
-            <div class="videos__container">
-                <!-- Single Video Starts Here -->
-                {% for v in video %}
-                <div class="video">
-                    <div class="video__thumbnail">
-                        <a href="{% url 'video-detail' v.id %}">
+        </div>
+            
+        <div class="videos__container">
+            <!-- Single Video Starts Here -->
+            {% for v in video %}
+            <div class="video">
+                <div class="video__thumbnail">
+                    <a href="{% url 'channel-profile' v.user.channel.id %}">
                         <img src="{{ v.image.url }}" alt="">
+                    </a>
+                </div>
+                <div class="video__details">
+                    <div class="author">
+                        <img src="{{ v.user.channel.image.url }}" alt="">
                     </div>
-                    <div class="video__details">
-                        <div class="author">
-                            <img src="{{ v.user.channel.image.url }}" alt="">
-                        </div>
-                        <div class="title">
-                            <a href="{% url 'video-detail' v.id %}">
-                                <h3>{{ v.title|truncatechars:35 }}</h3>
-                            </a>
-                            <a href="">
-                                <small>
-                                    {{ v.user.channel.channel_name }}
-                                    {% if v.user.channel.verified == True %}
-                                        <i class="fas fa-check-circle"></i>
-                                    {% endif %}
-                                </small>
-                            </a>
-                            <span><small>{{ v.views }} Views. {{ v.date|timesince }} ago</small></span>
-                        </div>
+                    <div class="title">
+                        <a href="{% url 'video-detail' v.id %}">
+                            <h3>{{ v.title|truncatechars:35 }}</h3>
+                        </a>
+                        <a href="{% url 'channel-profile' v.user.channel.id %}">
+                            <small>
+                                {{ v.user.channel.channel_name }}
+                                {% if v.user.channel.verified == True %}
+                                    <i class="fas fa-check-circle"></i>
+                                {% endif %}
+                            </small>
+                        </a>
+                        <span><small>{{ v.views }} Views. {{ v.date|timesince }} ago</small></span>
                     </div>
                 </div>
-                {% endfor %}
             </div>
+            {% endfor %}
         </div>
     </div>
-
-    <script src="{% static 'js/main.js' %}"></script>
-</body>
-</html>
+</div>
+{% endblock content %}

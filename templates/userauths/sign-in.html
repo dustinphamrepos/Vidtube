@@ -11,21 +11,7 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'css/normalize.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'css/materialize.min.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'css/loginStyle.css' %}">
-
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
-    <!-- <script>
-        function validateForm() {
-            var x = document.forms["myForm"]["name"].value;
-            if (x == "") {
-                alert("success");
-                return false;
-            } else {
-                alert("add the name");
-                return true;
-            }
-        }
-    </script> -->
-	
 </head>
 <body>
 	<div class="row gmailStyle">
@@ -44,11 +30,9 @@
 						<p class="center-align pad-no mar-no">to continue to application</p>
 						<div class="clearfix mar-all pad-all"></div>
 						<div id="formContainer" class="goRight">
-
 							<form class="loginForm" method="POST">
                 {% csrf_token %}
     						{% include 'partials/alert.html' %}
-
 								<div class="input-fields-div autoMargin">
 									<div class="input-field">
                     <input name="email" id="user_name" type="email" class="validate">
@@ -70,7 +54,6 @@
 								</div>
 							</form>
 						</div>
-
 						<div class="clearfix mar-all pad-all"></div>
 					</div>
 			</div>
