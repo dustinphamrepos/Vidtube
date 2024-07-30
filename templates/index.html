@@ -25,19 +25,19 @@
     <div class="header">
         <!-- Header menu Start -->
 
-        <div class="header__left">
-            <i id="menu" class="material-icons">menu</i>
-            <a href="index.html">
+        <a style="text-decoration: none;" href="{% url 'index' %}">
+            <div class="header__left">
+                <i id="menu" class="material-icons">menu</i>
                 <img src="https://www.xda-developers.com/files/2017/08/After-12-Years-Google-Gives-YouTube-a-New-Logo-1900x700_c.png" alt="">
-            </a>
-        </div>
+            </div>
+        </a>
         <!-- Header menu end -->
 
         <!-- Header seach Start -->
 
         <div class="header__search">
-            <form action="">
-                <input type="text" placeholder="Search">
+            <form action="{% url 'search' %}" method="GET">
+                <input type="text" placeholder="Search" name="q">
                 <button><i class="material-icons">search</i></button>
             </form>
         </div>

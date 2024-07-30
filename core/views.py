@@ -113,4 +113,14 @@ def load_video_likes(request, id):
   likes_lists = list(video.likes.values())
   return JsonResponse(likes_lists, safe=False, status=200)
 
-
+def searchView(request):
+  video = Video.objects.filter(visibility="public").order_by("-date")
+  query = request.GET.get("q")
+  if query:
+    video = video.filter(Q(title__icontains=query)|Q(description__icontains=query)).distinct()
+    
+  context = {
+    "video":video,
+    "query":query,
+  }
+  return render(request, "search.html", context)
