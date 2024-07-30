@@ -73,7 +73,9 @@
                     <div class="tag">
                         <label for="" class="tags">
                             {% for tag in video.tags.all %}
-                                #{{ tag.name }}
+                            <a id="channel-tag" href="{% url 'tags' tag.slug %}">
+                                #{{tag.name}}
+                            </a>
                             {% endfor %}
                         </label>
                         <p>{{ video.title }}</p>
