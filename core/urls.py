@@ -20,9 +20,11 @@ urlpatterns = [
   # Saving video to profile
   path("save-video/<video_id>/", views.save_video, name="save-video"),
   # Search URL
-  path("video/search/", views.searchView, name="search"),
+  path("video/search/", views.search_view, name="search"),
   # Tag URL
   path("tags/video/<slug:tag_slug>", views.tag_list, name="tags"),
   # Trending URL
   path("trending/", views.trending, name="trending"),
+  # Saved video URL
+  path("saved-videos/", views.saved_videos, name="saved-videos"),
 ]

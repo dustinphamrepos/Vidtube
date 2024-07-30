@@ -32,13 +32,15 @@
             {% for v in video %}
             <div class="video">
                 <div class="video__thumbnail">
-                    <a href="{% url 'channel-profile' v.user.channel.id %}">
+                    <a href="{% url 'video-detail' v.id %}">
                         <img src="{{ v.image.url }}" alt="">
                     </a>
                 </div>
                 <div class="video__details">
                     <div class="author">
-                        <img src="{{ v.user.channel.image.url }}" alt="">
+                        <a href="{% url 'channel-profile' v.user.channel.id %}">
+                            <img src="{{ v.user.channel.image.url }}" alt="">
+                        </a>
                     </div>
                     <div class="title">
                         <a href="{% url 'video-detail' v.id %}">

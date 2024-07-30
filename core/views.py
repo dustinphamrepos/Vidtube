@@ -112,7 +112,7 @@ def load_video_likes(request, id):
   likes_lists = list(video.likes.values())
   return JsonResponse(likes_lists, safe=False, status=200)
 
-def searchView(request):
+def search_view(request):
   video = Video.objects.filter(visibility="public").order_by("-date")
   query = request.GET.get("q")
   if query:
@@ -144,3 +144,13 @@ def trending(request):
     "video":video
   }
   return render(request, "trending.html", context)
+
+def saved_videos(request):
+  try:
+    video = request.user.profile.saved_videos.all()
+  except:
+    video = None
+  context = {
+    "video": video
+  }
+  return render(request, "saved-video.html", context)

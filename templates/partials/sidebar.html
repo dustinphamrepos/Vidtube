@@ -24,7 +24,7 @@
     </div>
     <hr>
     <div class="sidebar__categories">
-        <a style="text-decoration: none;" href="">
+        <a style="text-decoration: none;" href="{% url 'saved-videos' %}">
             <!-- Single Category -->
             <div class="sidebar__category">
                 <i class="material-icons">library_add_check</i>
@@ -56,7 +56,7 @@
         {% endif %}
 
         <!-- Single Category -->
-        <a style="text-decoration: none;" href="">
+        <a style="text-decoration: none;" href="{% url 'saved-videos' %}">
             <div class="sidebar__category">
                 <i class="material-icons">watch_later</i>
                 <span>Watch Later</span>
