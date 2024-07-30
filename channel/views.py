@@ -3,7 +3,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
-from .forms import VideoForm
+from .forms import CommunityForm, VideoForm
 from .models import Channel, Community, CommunityComment
 from core.models import Video
 
@@ -147,3 +147,23 @@ def video_edit(request, channel_id, video_id):
     "video": video,
   }
   return render(request, "channel/upload-video.html", context)
+
+@login_required
+def create_community_post(request, channel_id):
+  channel = Channel.objects.get(id=channel_id)
+
+  if request.method == "POST":
+    form = CommunityForm(request.POST, request.FILES)
+    if form.is_valid():
+      new_form = form.save(commit=False)
+      new_form.channel = channel
+      new_form.save()
+      post_id = new_form.id
+      messages.success(request, "Post created.")
+      return redirect("channel-community-detail", channel.id, post_id)
+  else:
+    form = CommunityForm()
+  context = {
+    "form":form,
+  }
+  return render(request, "channel/create-community-post.html", context)
