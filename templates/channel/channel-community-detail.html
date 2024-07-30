@@ -65,12 +65,16 @@
     <!-- Main Body Starts -->
     <div class="mainBody">
         {% include 'partials/sidebar.html' %}
-        
+    
         <!-- Video Section Starts -->
         <div class="videos">
             {% include 'channel/partials/channel-header.html' %}
             <div class="videos__container">
                 <!-- Single Video Starts Here -->
+
+                {% if channel.user == request.user %}
+                <a href="{% url 'create-community-post' request.user.channel.id %}"><i class="material-icons ">add</i> Create new community post...</a>
+                {% endif %}
 
                 <div class="content-border">
                     <div class="content-div">
@@ -92,17 +96,18 @@
                             <!-- <div class="elipse-icon">
                                 <i class="material-symbols-outlined">sort</i>
                             </div> -->
+                            {% if community.channel.user == request.user %}
                             <div class="dropdown">
                                 <button class="dropbtn"> 
-                                  <i class="material-symbols-outlined">sort</i>
+                                    <i class="material-symbols-outlined">sort</i>
                                 </button>
                                 <div class="dropdown-content">
-                                  <a href="#"> <i class="material-symbols-outlined">edit</i> &nbsp; Edit</a>
-                                  <a href="#"> <i class="material-symbols-outlined">delete</i> &nbsp; Delete</a>
-                                  <a href="#"> <i class="material-symbols-outlined">share</i> &nbsp; Share</a>
+                                    <a href="{% url 'edit-community-post' community.channel.id community.id %}"> <i class="material-symbols-outlined">edit</i> &nbsp; Edit</a>
+                                    <a href="{% url 'delete-community-post' community.channel.id community.id %}"> <i class="material-symbols-outlined">delete</i> &nbsp; Delete</a>
+                                    <a href="#"> <i class="material-symbols-outlined">share</i> &nbsp; Share</a>
                                 </div>
-                              </div>
-                            
+                            </div>
+                            {% endif %}
                         </div>
                         <div class="content">
                             <h3>{{ community.content }}</h3>

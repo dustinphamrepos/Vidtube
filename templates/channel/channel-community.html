@@ -59,6 +59,9 @@
 
             <div class="videos__container">
                 <!-- Single Video Starts Here -->
+                {% if channel.user == request.user %}
+                <a href="{% url 'create-community-post' request.user.channel.id %}"><i class="material-icons ">add</i> Create new community post...</a>
+                {% endif %}
 
                 {% for c in community %}
                 <div class="content-border">
@@ -87,11 +90,11 @@
                                     <i class="material-symbols-outlined">sort</i>
                                 </button>
                                 <div class="dropdown-content">
-                                    <a href="{% url 'edit-post' c.channel.id c.id %}"> <i class="material-symbols-outlined">edit</i> &nbsp; Edit</a>
-                                    <a href="{% url 'delete-post' c.channel.id c.id %}"> <i class="material-symbols-outlined">delete</i> &nbsp; Delete</a>
+                                    <a href="{% url 'edit-community-post' c.channel.id c.id %}"> <i class="material-symbols-outlined">edit</i> &nbsp; Edit</a>
+                                    <a href="{% url 'delete-community-post' c.channel.id c.id %}"> <i class="material-symbols-outlined">delete</i> &nbsp; Delete</a>
                                     <a href="#"> <i class="material-symbols-outlined">share</i> &nbsp; Share</a>
                                 </div>
-                                </div>
+                            </div>
                             {% endif %}
                         </div>
                         <div class="content">

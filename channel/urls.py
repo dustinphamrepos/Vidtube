@@ -19,5 +19,8 @@ urlpatterns = [
   path("channel/edit-video/<channel_id>/<video_id>/", views.video_edit, name="video-edit"),
   # Create community post URL
   path("channel/create-community-post/<channel_id>/", views.create_community_post, name="create-community-post"),
-
+  # Edit community post URL
+  path("channel/edit-community-post/<channel_id>/<community_post_id>/", views.edit_community_post, name="edit-community-post"),
+  # Delete community post URL
+  path("channel/delete-community-post/<channel_id>/<community_post_id>/", views.delete_community_post, name="delete-community-post"),
 ]
