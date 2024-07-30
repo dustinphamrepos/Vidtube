@@ -23,4 +23,6 @@ urlpatterns = [
   path("video/search/", views.searchView, name="search"),
   # Tag URL
   path("tags/video/<slug:tag_slug>", views.tag_list, name="tags"),
+  # Trending URL
+  path("trending/", views.trending, name="trending"),
 ]

@@ -137,3 +137,10 @@ def tag_list(request, tag_slug=None):
     "tag":tag,
   }
   return render(request, "tags.html", context)
+
+def trending(request):
+  video = Video.objects.filter(visibility="public").order_by("-views")
+  context = {
+    "video":video
+  }
+  return render(request, "trending.html", context)
